@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Rush Trading</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400i,700" rel="stylesheet">
+  <style>
+    /* Reset & globale Einstellungen */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+      color: #f5f5f5;
+      background: transparent;
+      overflow-x: hidden;
+    }
+    /* Hintergrundbild (logo.png) stark geblurrt */
+    .bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('logo.png') no-repeat center center;
+      background-size: cover;
+      filter: blur(20px);
+      z-index: -1;
+    }
+    /* Container für den Inhalt */
+    .container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    /* Hauptnavigation – Buttons verteilen sich gleichmäßig über die Breite */
+    .main-nav {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 40px;
+    }
+    .main-nav button {
+      flex: 1;
+      margin: 0 5px;
+      background: transparent;
+      border: none;
+      color: #FFD140;
+      font-size: 1.1em;
+      font-weight: bold;
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: border-bottom 0.3s;
+    }
+    .main-nav button:hover,
+    .main-nav button.active {
+      border-bottom: 2px solid #FFD140;
+    }
+    /* Startbildschirm – großer, eleganter Titel */
+    .centered {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .centered h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    /* Abschnittscontainer – Standard für alle Seiten */
+    .section {
+      display: none;
+      margin-top: 20px;
+    }
+    .section.active {
+      display: block;
+    }
+    /* Sub-Navigation für Unterbereiche */
+    .sub-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .sub-nav button {
+      background: #7289da;
+      border: none;
+      color: #fff;
+      padding: 10px 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .sub-nav button:hover {
+      background: #5b6eae;
+      transform: scale(1.05);
+    }
+    /* Text-Content Boxen – mit transparentem Hintergrund, abgerundeten Ecken und angenehmen Abständen */
+    .text-content {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .text-content h2 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+    .text-content h3 {
+      font-size: 1.75em;
+      margin: 1em 0 0.5em; /* zusätzlicher Abstand vor dem Namen */
+    }
+    .text-content h4 {
+      font-size: 1.25em;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+    /* Purchase-Bereich */
+    .purchase-options {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .purchase-option {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 300px;
+    }
+    .purchase-option button {
+      background: #7289da;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .purchase-option button:hover {
+      background: #5b6eae;
+    }
+    .paypal-form {
+      margin-top: 10px;
+      display: none;
+    }
+    /* Button und kleiner Text für Applications */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #7289da;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background-color: #5b6eae;
+    }
+    .small-text {
+      font-size: 0.8em;
+      margin-top: 10px;
+    }
+    /* Contributor-Formatierung */
+    .contributor {
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hintergrund -->
+  <div class="bg"></div>
+  
+  <div class="container">
+    <!-- Hauptnavigation -->
+    <div class="main-nav">
+      <button id="nav-custom" onclick="showSection('section-custom', this)">Custom Branding</button>
+      <button id="nav-contributors" onclick="showSection('section-contributors', this)">Contributors</button>
+      <button id="nav-partners" onclick="showSection('section-partners', this)">Partners</button>
+      <button id="nav-applications" onclick="showSection('section-applications', this)">Applications</button>
+    </div>
+    
+    <!-- Startbildschirm -->
+    <div id="section-home" class="section active centered">
+      <h1>Gold Rush Trading</h1>
+    </div>
+    
+    <!-- Custom Branding Section -->
+    <div id="section-custom" class="section">
+      <div class="centered">
+        <h1>Custom Branding</h1>
+      </div>
+      <!-- Subnavigation für Custom Branding -->
+      <div class="sub-nav">
+        <button onclick="window.open('https://docs.google.com/document/d/1JaX9IsWCMMkM-3sa5pLi5bF7XCc__uUS-xwjV1yDl9Q/edit?usp=sharing', '_blank')">Terms of Service</button>
+        <button onclick="showCustomSub('pricing')">Pricing & Information</button>
+        <button onclick="showCustomSub('purchase')">Purchase</button>
+      </div>
+      <!-- Unterabschnitt Pricing & Information -->
+      <div id="custom-pricing" class="text-content" style="display:none;">
+        <h2>Pricing & Information</h2>
+        <h3>Custom Branding Bot Service</h3>
+        <p>Enhance your brand’s presence on Discord with a fully customized bot tailored to your needs. Our <strong>Custom Branding Bot Service</strong> offers flexibility, reliability, and professional support to ensure a seamless experience.</p>
+        <h4>Pricing</h4>
+        <p><strong>One-time Payment:</strong> 15€ (Lifetime Hosting)</p>
+        <p>- Pay once, and we will handle the hosting of your custom-branded bot indefinitely.</p>
+        <p><strong>Monthly Subscription:</strong> 3€/month</p>
+        <p>- A flexible and budget-friendly option with continuous hosting and support.</p>
+        <p>All payments must be made upfront before deployment.</p>
+        <h4>What’s Included?</h4>
+        <ul>
+          <li><strong>Custom Branding:</strong> Your own bot name, avatar, and output style.</li>
+          <li><strong>Reliable Hosting:</strong> Ensuring <strong>24/7 uptime</strong> with secure infrastructure.</li>
+          <li><strong>Basic Maintenance:</strong> Free bug fixes and minor updates.</li>
+          <li><strong>Initial Setup:</strong> Guidance on integrating your bot into your Discord server.</li>
+        </ul>
+        <h4>Optional Add-Ons</h4>
+        <ul>
+          <li><strong>Feature Enhancements:</strong> Additional functionality upon request (pricing varies).</li>
+          <li><strong>Custom Interactions:</strong> Tailor the bot’s interactions to your needs.</li>
+        </ul>
+        <h4>How It Works</h4>
+        <ol>
+          <li><strong>Request & Payment:</strong> Select your pricing model and provide customization details.</li>
+          <li><strong>Development & Setup:</strong> We configure your bot with the requested branding and features.</li>
+          <li><strong>Delivery & Hosting:</strong> Your bot is deployed, and we provide setup instructions.</li>
+          <li><strong>Ongoing Support:</strong> Minor updates and maintenance included; major changes available at additional cost.</li>
+        </ol>
+        <p><strong>Ready to get started?</strong> Contact us today to create your custom-branded Discord value bot!</p>
+      </div>
+      <!-- Unterabschnitt Purchase -->
+      <div id="custom-purchase" class="text-content" style="display:none;">
+        <h2>Select a payment option:</h2>
+        <div class="purchase-options">
+          <!-- Option 1: One year -->
+          <div class="purchase-option">
+            <h3>One year of Custom Branding</h3>
+            <p>By using this payment your bot will be hosted 24/7 without any further hosting payments until the end of the year.</p>
+            <button onclick="togglePaypal('paypal-one')">Select One Year</button>
+            <div id="paypal-one" class="paypal-form">
+              <style>
+                .pp-TVPPT49DJAA84 {
+                  text-align: center;
+                  border: none;
+                  border-radius: 0.25rem;
+                  min-width: 11.625rem;
+                  padding: 0 2rem;
+                  height: 2.625rem;
+                  font-weight: bold;
+                  background-color: #FFD140;
+                  color: #000;
+                  font-family: "Helvetica Neue", Arial, sans-serif;
+                  font-size: 1rem;
+                  line-height: 1.25rem;
+                  cursor: pointer;
+                }
+              </style>
+              <form action="https://www.paypal.com/ncp/payment/TVPPT49DJAA84" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <input class="pp-TVPPT49DJAA84" type="submit" value="One year" />
+                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+                <section> Processed by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+              </form>
+            </div>
+          </div>
+          <!-- Option 2: Monthly -->
+          <div class="purchase-option">
+            <h3>Monthly Custom Branding</h3>
+            <p>By using this payment you will have to pay 3 euros monthly. You can purchase this item a maximum amount of 12 times to get one year of hosting.</p>
+            <button onclick="togglePaypal('paypal-monthly')">Select Monthly</button>
+            <div id="paypal-monthly" class="paypal-form">
+              <style>
+                .pp-C5J7QU4M34FZL {
+                  text-align: center;
+                  border: none;
+                  border-radius: 0.25rem;
+                  min-width: 11.625rem;
+                  padding: 0 2rem;
+                  height: 2.625rem;
+                  font-weight: bold;
+                  background-color: #FFD140;
+                  color: #000;
+                  font-family: "Helvetica Neue", Arial, sans-serif;
+                  font-size: 1rem;
+                  line-height: 1.25rem;
+                  cursor: pointer;
+                }
+              </style>
+              <form action="https://www.paypal.com/ncp/payment/C5J7QU4M34FZL" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <input class="pp-C5J7QU4M34FZL" type="submit" value="Monthly" />
+                <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+                <section> Processed by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+              </form>
+            </div>
+          </div>
+        </div>
+        <p>By purchasing a product, you automatically agree to our <a href="https://docs.google.com/document/d/1JaX9IsWCMMkM-3sa5pLi5bF7XCc__uUS-xwjV1yDl9Q/edit?usp=sharing" target="_blank">terms of service</a>!</p>
+      </div>
+      <script>
+        function showCustomSub(section) {
+          document.getElementById('custom-pricing').style.display = 'none';
+          document.getElementById('custom-purchase').style.display = 'none';
+          if (section === 'pricing') {
+            document.getElementById('custom-pricing').style.display = 'block';
+          } else if (section === 'purchase') {
+            document.getElementById('custom-purchase').style.display = 'block';
+          }
+        }
+        function togglePaypal(id) {
+          var elem = document.getElementById(id);
+          if (elem.style.display === 'none' || elem.style.display === '') {
+            elem.style.display = 'block';
+          } else {
+            elem.style.display = 'none';
+          }
+        }
+      </script>
+    </div>
+    
+    <!-- Contributors Section -->
+    <div id="section-contributors" class="section">
+      <div class="text-content">
+        <h1>Contributors</h1>
+        
+        <div class="contributor">
+          <h3>EELE</h3>
+          <p><em>Lead Developer &amp; Server Owner – The main developer of the Value Bot and the owner of the server. EELE is responsible for overseeing all major updates and improvements.</em></p>
+        </div>
+        
+        <div class="contributor">
+          <h3>ethachu21</h3>
+          <p><em>Server Administrator &amp; Developer – A key person in the development team, managing the auction tracker and ensuring the server runs smoothly.</em></p>
+        </div>
+        
+        <div class="contributor">
+          <h3>mnn6</h3>
+          <p><em>Value Helper &amp; Development Team Member – Plays an important role in keeping the bot’s value system updated, ensuring accuracy and reliability.</em></p>
+        </div>
+        
+        <div class="contributor">
+          <h3>BooogaGaming</h3>
+          <p><em>Development Team Member – Contributed significantly to the bot’s development in 2024, particularly in creating the information commands.</em></p>
+        </div>
+        
+        <div class="contributor">
+          <h3>Matesadlox</h3>
+          <p><em>Value Helper – Assists in keeping the bot up to date with the latest values.</em></p>
+        </div>
+        
+        <p>We appreciate the hard work and dedication of our contributors who help make the bot a valuable tool for our community!</p>
+      </div>
+    </div>
+    
+    <!-- Partners Section -->
+    <div id="section-partners" class="section">
+      <div class="centered">
+        <h1>Partners</h1>
+      </div>
+      <!-- Subnavigation für Partners -->
+      <div class="sub-nav">
+        <button onclick="showPartnerSub('trading')">Trading/Value Community 2.0</button>
+        <button onclick="showPartnerSub('news')">Western Anomic News</button>
+        <button onclick="showPartnerSub('merchants')">Wild West Merchants</button>
+      </div>
+      <!-- Unterabschnitte für Partners -->
+      <div id="partner-trading" class="text-content" style="display:none;">
+        <p>Hello!<br>
+          This is the Trading/Value 2.0 Community Server!<br>
+          We are a Trading Community that helps anyone who needs help with their trade. We have many Value Experts like MnnDaCat!<br>
+          We also have a website that lets you calculate the value of items and the fee as well.<br>
+          Join us, partner, and let us help you become a Pro Trader!</p>
+        <p><a href="https://discord.gg/sn7ZnWBJuC" target="_blank">Link</a></p>
+      </div>
+      <div id="partner-news" class="text-content" style="display:none;">
+        <p><strong>📰 Welcome to Western Anomic News — Your No.1 Source for All Things Wild West!</strong></p>
+        <p>
+          ✔ Reliable, unbiased news<br>
+          ✔ Daily updates &amp; top-tier content<br>
+          ✔ Active trading &amp; faction news
+        </p>
+        <p>
+          🇬🇧 Stay informed—join now!<br>
+          🇫🇷 Restez informé—rejoignez-nous !<br>
+          🇪🇸 Mantente informado—únete ahora!
+        </p>
+        <p>👉 <a href="https://discord.gg/qPe3ngC27r" target="_blank">https://discord.gg/qPe3ngC27r</a></p>
+      </div>
+      <div id="partner-merchants" class="text-content" style="display:none;">
+        <p>Wild West Merchants / Trading Community, Giveaways.<br>
+          <a href="https://discord.com/invite/CswDv4JbTM" target="_blank">https://discord.com/invite/CswDv4JbTM</a></p>
+      </div>
+      <script>
+        function showPartnerSub(section) {
+          document.getElementById('partner-trading').style.display = 'none';
+          document.getElementById('partner-news').style.display = 'none';
+          document.getElementById('partner-merchants').style.display = 'none';
+          if (section === 'trading') {
+            document.getElementById('partner-trading').style.display = 'block';
+          } else if (section === 'news') {
+            document.getElementById('partner-news').style.display = 'block';
+          } else if (section === 'merchants') {
+            document.getElementById('partner-merchants').style.display = 'block';
+          }
+        }
+      </script>
+    </div>
+    
+    <!-- Applications Section -->
+    <div id="section-applications" class="section">
+      <div class="centered">
+        <h1>Applications</h1>
+      </div>
+      <!-- Subnavigation für Applications -->
+      <div class="sub-nav">
+        <button onclick="showAppSub('partnerships')">Partnerships</button>
+        <button onclick="showAppSub('development')">Development Team</button>
+        <button onclick="showAppSub('helper')">Value Helper</button>
+      </div>
+      <!-- Unterabschnitte für Applications -->
+      <div id="app-partnerships" class="text-content" style="display:none;">
+        <h3>Partnership Requirements</h3>
+        <ul>
+          <li>Be the owner or representative of a Discord server with at least 50 members.</li>
+          <li>Comply with Discord Community Guidelines, Roblox Terms of Use and Roblox Community Standards.</li>
+          <li>Have a representative in Gold Rush Trading.</li>
+        </ul>
+        <a class="btn" href="https://discord.com/channels/1310977344076251176/1311033788473671690" target="_blank">Go to Ticket</a>
+        <p class="small-text">The button does not take you to the ticket system? Make sure to <a href="https://discord.gg/avHeJcG98r" target="_blank">Join the server</a>!</p>
+      </div>
+      <div id="app-development" class="text-content" style="display:none;">
+        <h3>Development Team Requirements:</h3>
+        <ul>
+          <li>Be able to work together with other developers of the bot.</li>
+          <li>For Bot Developers: Be able to code in Python in a decent way.</li>
+        </ul>
+        <a class="btn" href="https://discord.com/channels/1310977344076251176/1311033788473671690" target="_blank">Go to Ticket</a>
+        <p class="small-text">The button does not take you to the ticket system? Make sure to <a href="https://discord.gg/avHeJcG98r" target="_blank">Join the server</a>!</p>
+      </div>
+      <div id="app-helper" class="text-content" style="display:none;">
+        <h3>Value Helper Requirements:</h3>
+        <ul>
+          <li>Demonstrate a strong understanding of the current values in The Wild West.</li>
+          <li>Be active and update values regularly.</li>
+        </ul>
+        <a class="btn" href="https://discord.com/channels/1310977344076251176/1311033788473671690" target="_blank">Go to Ticket</a>
+        <p class="small-text">The button does not take you to the ticket system? Make sure to <a href="https://discord.gg/avHeJcG98r" target="_blank">Join the server</a>!</p>
+      </div>
+      <script>
+        function showAppSub(section) {
+          document.getElementById('app-partnerships').style.display = 'none';
+          document.getElementById('app-development').style.display = 'none';
+          document.getElementById('app-helper').style.display = 'none';
+          if (section === 'partnerships') {
+            document.getElementById('app-partnerships').style.display = 'block';
+          } else if (section === 'development') {
+            document.getElementById('app-development').style.display = 'block';
+          } else if (section === 'helper') {
+            document.getElementById('app-helper').style.display = 'block';
+          }
+        }
+      </script>
+    </div>
+  </div>
+  
+  <!-- Script für Hauptnavigation -->
+  <script>
+    function showSection(sectionId, btn) {
+      // Alle Sections ausblenden
+      var sections = document.getElementsByClassName('section');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+      }
+      document.getElementById(sectionId).classList.add('active');
+      // Alle Hauptnavigationsbuttons zurücksetzen
+      var navButtons = document.querySelectorAll('.main-nav button');
+      navButtons.forEach(function(b) {
+        b.classList.remove('active');
+      });
+      // Den aktiven Button hervorheben
+      if(btn) {
+        btn.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
