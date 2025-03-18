@@ -108,6 +108,7 @@
       border-radius: 8px;
       margin-bottom: 20px;
       line-height: 1.6;
+      text-align: center; /* Alle Texte zentral ausrichten */
     }
     .text-content h2 {
       font-size: 2em;
@@ -115,12 +116,16 @@
     }
     .text-content h3 {
       font-size: 1.75em;
-      margin: 1em 0 0.5em; /* zusätzlicher Abstand vor dem Namen */
+      margin: 1em 0 0.5em;
     }
     .text-content h4 {
       font-size: 1.25em;
       margin-top: 1em;
       margin-bottom: 0.5em;
+    }
+    /* Neue CSS-Regel für Markdown-ähnliche fette Texte */
+    .md-bold {
+      font-weight: bold;
     }
     /* Purchase-Bereich */
     .purchase-options {
@@ -212,33 +217,33 @@
       <div id="custom-pricing" class="text-content" style="display:none;">
         <h2>Pricing & Information</h2>
         <h3>Custom Branding Bot Service</h3>
-        <p>Enhance your brand’s presence on Discord with a fully customized bot tailored to your needs. Our <strong>Custom Branding Bot Service</strong> offers flexibility, reliability, and professional support to ensure a seamless experience.</p>
+        <p>Enhance your brand’s presence on Discord with a fully customized bot tailored to your needs. Our <span class="md-bold">Custom Branding Bot Service</span> offers flexibility, reliability, and professional support to ensure a seamless experience.</p>
         <h4>Pricing</h4>
-        <p><strong>One-time Payment:</strong> 15€ (Lifetime Hosting)</p>
-        <p>- Pay once, and we will handle the hosting of your custom-branded bot indefinitely.</p>
-        <p><strong>Monthly Subscription:</strong> 3€/month</p>
+        <p><span class="md-bold">One-time Payment:</span> 15€ (One year Hosting)</p>
+        <p>- Pay once, and we will handle the hosting of your custom-branded for one year.</p>
+        <p><span class="md-bold">Monthly Subscription:</span> 3€/month</p>
         <p>- A flexible and budget-friendly option with continuous hosting and support.</p>
         <p>All payments must be made upfront before deployment.</p>
         <h4>What’s Included?</h4>
         <ul>
-          <li><strong>Custom Branding:</strong> Your own bot name, avatar, and output style.</li>
-          <li><strong>Reliable Hosting:</strong> Ensuring <strong>24/7 uptime</strong> with secure infrastructure.</li>
-          <li><strong>Basic Maintenance:</strong> Free bug fixes and minor updates.</li>
-          <li><strong>Initial Setup:</strong> Guidance on integrating your bot into your Discord server.</li>
+          <li><span class="md-bold">Custom Branding:</span> Your own bot name, avatar, and output style.</li>
+          <li><span class="md-bold">Reliable Hosting:</span> Ensuring <span class="md-bold">24/7 uptime</span> with secure infrastructure.</li>
+          <li><span class="md-bold">Basic Maintenance:</span> Free bug fixes and minor updates.</li>
+          <li><span class="md-bold">Initial Setup:</span> Guidance on integrating your bot into your Discord server.</li>
         </ul>
         <h4>Optional Add-Ons</h4>
         <ul>
-          <li><strong>Feature Enhancements:</strong> Additional functionality upon request (pricing varies).</li>
-          <li><strong>Custom Interactions:</strong> Tailor the bot’s interactions to your needs.</li>
+          <li><span class="md-bold">Feature Enhancements:</span> Additional functionality upon request (pricing varies).</li>
+          <li><span class="md-bold">Custom Interactions:</span> Tailor the bot’s interactions to your needs.</li>
         </ul>
         <h4>How It Works</h4>
         <ol>
-          <li><strong>Request & Payment:</strong> Select your pricing model and provide customization details.</li>
-          <li><strong>Development & Setup:</strong> We configure your bot with the requested branding and features.</li>
-          <li><strong>Delivery & Hosting:</strong> Your bot is deployed, and we provide setup instructions.</li>
-          <li><strong>Ongoing Support:</strong> Minor updates and maintenance included; major changes available at additional cost.</li>
+          <li><span class="md-bold">Request & Payment:</span> Select your pricing model and provide customization details.</li>
+          <li><span class="md-bold">Development & Setup:</span> We configure your bot with the requested branding and features.</li>
+          <li><span class="md-bold">Delivery & Hosting:</span> Your bot is deployed, and we provide setup instructions.</li>
+          <li><span class="md-bold">Ongoing Support:</span> Minor updates and maintenance included; major changes available at additional cost.</li>
         </ol>
-        <p><strong>Ready to get started?</strong> Contact us today to create your custom-branded Discord value bot!</p>
+        <p><span class="md-bold">Ready to get started?</span> Contact us today to create your custom-branded Discord value bot!</p>
       </div>
       <!-- Unterabschnitt Purchase -->
       <div id="custom-purchase" class="text-content" style="display:none;">
@@ -372,6 +377,7 @@
         <button onclick="showPartnerSub('trading')">Trading/Value Community 2.0</button>
         <button onclick="showPartnerSub('news')">Western Anomic News</button>
         <button onclick="showPartnerSub('merchants')">Wild West Merchants</button>
+        <button onclick="showPartnerSub('pinkerton')">Pinkerton Detektive Agency</button>
       </div>
       <!-- Unterabschnitte für Partners -->
       <div id="partner-trading" class="text-content" style="display:none;">
@@ -383,7 +389,7 @@
         <p><a href="https://discord.gg/sn7ZnWBJuC" target="_blank">Link</a></p>
       </div>
       <div id="partner-news" class="text-content" style="display:none;">
-        <p><strong>📰 Welcome to Western Anomic News — Your No.1 Source for All Things Wild West!</strong></p>
+        <p><span class="md-bold">📰 Welcome to Western Anomic News — Your No.1 Source for All Things Wild West!</span></p>
         <p>
           ✔ Reliable, unbiased news<br>
           ✔ Daily updates &amp; top-tier content<br>
@@ -400,17 +406,37 @@
         <p>Wild West Merchants / Trading Community, Giveaways.<br>
           <a href="https://discord.com/invite/CswDv4JbTM" target="_blank">https://discord.com/invite/CswDv4JbTM</a></p>
       </div>
+      <div id="partner-pinkerton" class="text-content" style="display:none;">
+        <p><span class="md-bold">Join the Pinkertons Today!</span></p>
+        <p><span class="md-bold">·  Manners Maketh Men  ·</span></p>
+        <p><span class="md-bold">A kingdom falls when the king becomes ignorant and arrogant.</span> Pinkertons are of the highest class. We thrive on the kindness and morals of our members. We provide hospitality to those who look for an experience and wish to have just a bit of action filled fun.</p>
+        <p><span class="md-bold">·  The Pinkerton Agent  ·</span></p>
+        <p>It takes great skill and patience to become one of us for we love war.</p>
+        <p><span class="md-bold">What We Offer:</span></p>
+        <ul>
+          <li><span class="md-bold">Server Levels:</span> Engage with an active community and climb the ranks.</li>
+          <li><span class="md-bold">Earnable In-Game Ranks:</span> Showcase your contributions and commitment.</li>
+          <li><span class="md-bold">Wars and Tryouts:</span> Improve your skills, enhance communication, and earn promotions.</li>
+          <li><span class="md-bold">Exciting Events:</span> Win in-game cash and items for your active participation.</li>
+        </ul>
+        <p><span class="md-bold">Ready to join?</span></p>
+        <p><span class="md-bold">Join Us on Discord!: </span>discord.gg/pkn</p>
+        <p>Great faction, make sure to join!</p>
+      </div>
       <script>
         function showPartnerSub(section) {
           document.getElementById('partner-trading').style.display = 'none';
           document.getElementById('partner-news').style.display = 'none';
           document.getElementById('partner-merchants').style.display = 'none';
+          document.getElementById('partner-pinkerton').style.display = 'none';
           if (section === 'trading') {
             document.getElementById('partner-trading').style.display = 'block';
           } else if (section === 'news') {
             document.getElementById('partner-news').style.display = 'block';
           } else if (section === 'merchants') {
             document.getElementById('partner-merchants').style.display = 'block';
+          } else if (section === 'pinkerton') {
+            document.getElementById('partner-pinkerton').style.display = 'block';
           }
         }
       </script>
